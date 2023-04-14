@@ -41,22 +41,16 @@ class Vampire
         @thirsty = true
     end
 
-    def change_pet(new_pet)
-        @pet = new_pet
-    end
-
-    def drink_method(takes_drink)
-        @thirsty = takes_drink
-        false
+    def drink
+        @thirsty = false
     end
 end
 
-vampire1 = Vampire.new("Dracula", "bat",)
+vampire1 = Vampire.new("Dracula", "pet")
 p vampire1
-vampire1.change_pet("bunny")
-p vampire1
-vampire1.drink_method("false")
-p vampire1
+vampire2 = Vampire.new("Count", "bunny")
+p vampire2
+
 
 
 #  Write a Dragon class
@@ -68,26 +62,34 @@ p vampire1
 
 class Dragon
     attr_reader :name, :rider, :color, :is_hungry
-
-    def initialize(name, rider, color, is_hungry = "true")
+  
+    def initialize(name, rider, color, is_hungry = true)
+      
         @name = name
         @rider = rider
         @color = color
-        @is_hungry = true
+        @counter = 0
+        @is_hungry = is_hungry
     end
-
-        def eat_method(eats_meat)
-            if eats_meat >=4
-                @is_hungry = false
-            end
+  
+    def eat
+        @counter = @counter + 1
+        if @counter >= 4
+            @is_hungry = false
         end
-    end
+    end      
+end
 
-    dragon1 = Dragon.new("Niv", "Mizzet", "Red")
-      p dragon1
-    dragon1.eat_method(4)
-      p dragon1
-
+dragon1 = Dragon.new("Niv", "Mizzet", "Red")
+p dragon1.name
+p dragon1.rider
+p dragon1.color
+p dragon1.is_hungry
+dragon1.eat
+dragon1.eat
+dragon1.eat
+dragon1.eat
+p dragon1.is_hungry
 
 #  Write a Hobbit class
 #  it should have a dynamic name attribute (string)
@@ -99,46 +101,29 @@ class Dragon
 #  it should have a has_ring attribute. If the Hobbit's name is "Frodo", true, if not, false.
 
 class Hobbit
-    attr_reader :name, :disposition, :age
+  attr_reader :name, :disposition, :age, :is_adult, :is_old, :has_ring
 
-    def initialize(name, disposition, age = 0, is_adult = false, is_old = false, has_ring = false)
-        @name = name
-        @disposition = disposition
-        @age = 0
-    end
+  def initialize(name, disposition, age =0)
+    @name = name
+    @disposition = disposition
+    @age = age
+    @is_adult = false
+    @is_old = false
+  end
 
-    def celebrate_birthday(new_age)
-        @age = new_age + 1
-    end
 
-    def become_adult(new_age)
-       if new_age >= 33
-        @is_adult = true
-       end
-    end
+  def celebrate_birthday
+    @age += 1
+    @is_adult = true if @age >= 33
+    @is_old = true if @age >= 101
+  end
 
-    def become_old(new_age)
-        if new_age >= 101
-            @is_old = true
-        end
-    end
-
-    def ring_bearer(new_name)
-        if name = "frodo"
-            has_ring = true
-        end
-    end
+  def has_ring
+    @name == "frodo"
+  end
 end
 
 hobbit1 = Hobbit.new("frodo", "friendly", 33)
-p hobbit1
-hobbit1.celebrate_birthday(33)
-p hobbit1
-hobbit1.become_adult(33)
-p hobbit1
-hobbit1.become_old(101)
-p hobbit1
-hobbit1.ring_bearer("frodo")
 p hobbit1
 
 
