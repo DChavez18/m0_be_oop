@@ -109,6 +109,7 @@ class Hobbit
     @age = age
     @is_adult = false
     @is_old = false
+    @has_ring = has_ring
   end
 
 
